@@ -14,8 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.views.generic import RedirectView
+
+from listings import urls as listings_urls
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('api/', include(listings_urls)),
+
+    # Redirect just for exemplification
+    path('', RedirectView.as_view(url='api/v1/units/?max_price=100&check_in=2021-12-09&check_out=2021-12-12', permanent=False), name='home'),
 ]
