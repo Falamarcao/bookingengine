@@ -42,7 +42,7 @@ class Units(views.APIView):
         
             booking_info = booking_info.filter(price__in=cheapest.values_list('price__min', flat=True))  \
                            |    \
-                           booking_info.exclude(listing__isnull=True) # keep apartments: they has 'listing' not null
+                           booking_info.exclude(listing__isnull=True) # keep apartments
 
             return response.Response({'items': BookingInfoSerializer(booking_info, many=True).data})
        
