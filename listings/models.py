@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 
 
@@ -74,3 +75,30 @@ class BookingInfo(models.Model):
             obj = self.hotel_room_type
             
         return f'{obj} {self.price}'
+
+
+class Reservation(models.Model):
+    """
+    Reservation Model for blocked (reserved) days.
+    To make reservations for each Apartment or HotelRoom.
+    """ 
+
+    booking_info = models.OneToOneField(
+        BookingInfo,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name='reservation'
+    )
+    check_in = models.DateTimeField(
+        default=datetime.now,
+        blank=False,
+        null=False,
+    )
+    check_out = models.DateTimeField(
+        blank=False,
+        null=False,
+    )
+
+    def __str__(self):
+        return f'{self.booking_info} from {self.check_in} until {self.check_out}'
