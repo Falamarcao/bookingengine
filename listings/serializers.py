@@ -1,47 +1,6 @@
 from .models import *
 from rest_framework import serializers
 
-"""
-{
-    "items": [
-        {
-            "listing_type": "Apartment",
-            "title": "Luxurious Studio",
-            "country": "UK",
-            "city": "London",
-            "price": "40"
-
-        },
-    ...
-"""
-
-"""
-    {
-        "listing": {
-            "listing_type": "apartment",
-            "title": "Luxurious Studio",
-            "country": "UK",
-            "city": "London"
-        },
-        "hotel_room_type": null,
-        "price": "40.00"
-    },
-"""
-
-class ListingSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Listing
-        fields = (
-            'listing_type',
-            'title',
-            'country',
-            'city',
-        )
-
-# class HotelRoomTypeSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = HotelRoomType
-#         exclude = ('id','hotel')
 
 class BookingInfoSerializer(serializers.ModelSerializer):
     listing_type = serializers.SerializerMethodField()
