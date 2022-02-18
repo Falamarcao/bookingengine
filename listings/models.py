@@ -90,6 +90,15 @@ class Reservation(models.Model):
         on_delete=models.CASCADE,
         related_name='reservation'
     )
+
+    room_number = models.OneToOneField(
+        HotelRoom,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name='reservation'
+    )
+
     check_in = models.DateTimeField(
         default=datetime.now,
         blank=False,
